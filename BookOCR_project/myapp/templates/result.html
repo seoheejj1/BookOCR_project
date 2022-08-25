@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block src %}
+{% load static %}
+<script src="{% static 'bs/js/html2canvas.js' %}"></script>
+
+<style>
+    #tr1 td {
+        border:3px solid #b9c1d7;
+        border-radius:10px;
+    }
+    #output, #cam{
+        width:520px;
+        height:520px;
+    }
+    #btn_div{
+        text-align:center;
+        padding:60px;
+    }
+    #tr1 img{
+        width:100%;
+        height:100%;
+    }
+    
+</style>
+
+{% endblock %}
+
+{% block contents %}
+
+<body class="container" style='overflow: hidden;'>
+
+    <div class='rounded vh-100 m-2 p-2 d-flex justify-content-center align-items-center bg-light' style='overflow: auto  ;'>
+        <table>
+            <tr id='tr0'>
+                <td>
+                   <div style='float:left;margin-top:25px;'>
+                        <button class='btn btn-outline-secondary btn-lg' type='button' onclick="location.href='http://127.0.0.1:8000/'"><i class="fa-solid fa-house"></i></button>
+                    </div> 
+                    <div style='float:right; margin-right: -1044px; margin-bottom: 20px; margin-top:25px;'>
+                        <button class='btn btn-outline-secondary btn-lg' type='button' id='recom_next'><i class="fa-solid fa-circle-chevron-right"></i></button>
+                    </div>
+                </td>
+            </tr>
+            <tr id='tr1'>
+                <td>
+                    <div style='transform: rotate(-90deg); width: 120px; color:#b9c1d7;'><h5>OCR result</h5></div>
+                </td>
+                <td>
+                    <div id='output'>
+                        <img src="{% static 'contour_list/contour.jpg' %}" alt="">
+                    </div>
+                </td>
+                <td>
+                    <div id='output'>
+                        <img src="{% static 'contour_list/text_contour.jpg' %}" alt="">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3'>
+                    <div id='btn_div'>
+                        <form action="{% url 'ocr:recommend' %}">
+                            <button class='btn btn-secondary btn-lg'>추천도서 보러가기</button>
+                            <input type="hidden", value="{{ text }}" name="ocr_text">
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        </table> 
+    </div>
+</body>
+
+{% endblock %}
